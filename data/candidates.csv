@@ -1,0 +1,51 @@
+id,name,skills,experience_years,salary_expectation,application_date
+1,Amit Sharma,"{'java': 6, 'sql': 7, 'data_analysis': 9}",8,57621.0,2025-04-04 00:59:06.139814
+2,Rajesh Kumar,"{'cloud_computing': 6, 'ui_design': 5, 'css': 8}",10,84022.0,2025-04-04 00:59:06.139814
+3,Vikram Singh,"{'python': 6, 'ui_design': 8, 'javascript': 6}",5,104351.0,2025-04-04 00:59:06.139814
+4,Ravi Verma,"{'data_analysis': 5, 'cloud_computing': 5, 'c++': 7}",4,74017.0,2025-04-04 00:59:06.139814
+5,Sanjay Patel,"{'sql': 10, 'ui_design': 10, 'python': 7}",5,51140.0,2025-04-04 00:59:06.139814
+6,Anil Mehta,"{'javascript': 7, 'data_analysis': 5, 'sql': 10}",4,82847.0,2025-04-04 00:59:06.139814
+7,Sunil Joshi,"{'ui_design': 5, 'css': 10, 'cloud_computing': 8, 'javascript': 10}",4,81831.0,2025-04-04 00:59:06.139814
+8,Manoj Thakur,"{'css': 7, 'data_analysis': 5}",2,82957.0,2025-04-04 00:59:06.139814
+9,Dinesh Yadav,"{'javascript': 10, 'c++': 5}",5,67405.0,2025-04-04 00:59:06.139814
+10,Rakesh Chauhan,"{'data_analysis': 10, 'sql': 7, 'javascript': 7}",1,89677.0,2025-04-04 00:59:06.139814
+11,Prakash Desai,"{'ui_design': 5, 'machine_learning': 8}",4,61335.0,2025-04-04 00:59:06.139814
+12,Naveen Kapoor,"{'machine_learning': 6, 'css': 8, 'cloud_computing': 8}",7,71337.0,2025-04-04 00:59:06.139814
+13,Arjun Malhotra,"{'data_analysis': 9, 'css': 10, 'ui_design': 5}",9,53471.0,2025-04-04 00:59:06.139814
+14,Deepak Sinha,"{'data_analysis': 10, 'css': 6}",6,86798.0,2025-04-04 00:59:06.139814
+15,Kiran Choudhary,"{'sql': 10, 'css': 7}",9,53200.0,2025-04-04 00:59:06.139814
+16,Pankaj Bansal,"{'python': 7, 'sql': 6}",2,82136.0,2025-04-04 00:59:06.139814
+17,Vikas Reddy,"{'c++': 10, 'javascript': 10, 'python': 9}",9,110394.0,2025-04-04 00:59:06.139814
+18,Suraj Nair,"{'data_analysis': 5, 'javascript': 6, 'css': 8, 'ui_design': 5}",4,107670.0,2025-04-04 00:59:06.139814
+19,Rahul Saxena,"{'css': 8, 'python': 9}",3,103004.0,2025-04-04 00:59:06.139814
+20,Rohan Bhardwaj,"{'javascript': 5, 'machine_learning': 9}",3,66871.0,2025-04-04 00:59:06.139814
+21,Ajay Iyer,"{'machine_learning': 7, 'cloud_computing': 5, 'javascript': 6}",7,66583.0,2025-04-04 00:59:06.139814
+22,Harish Pillai,"{'c++': 5, 'python': 8, 'sql': 5}",10,53556.0,2025-04-04 00:59:06.139814
+23,Kunal Ghosh,"{'cloud_computing': 8, 'javascript': 5, 'python': 5}",1,78331.0,2025-04-04 00:59:06.139814
+24,Suresh Das,"{'sql': 7, 'machine_learning': 8}",5,67648.0,2025-04-04 00:59:06.139814
+25,Tarun Dutta,"{'ui_design': 10, 'cloud_computing': 10}",1,51073.0,2025-04-04 00:59:06.139814
+26,Gaurav Bose,"{'c++': 7, 'sql': 5}",8,106853.0,2025-04-04 00:59:06.139814
+27,Yashwant Gokhale,"{'c++': 9, 'sql': 9, 'ui_design': 5}",8,107120.0,2025-04-04 00:59:06.139814
+28,Kartik Subramanian,"{'java': 9, 'data_analysis': 10, 'python': 9, 'cloud_computing': 9}",7,119304.0,2025-04-04 00:59:06.139814
+29,Abhishek Mukherjee,"{'python': 7, 'javascript': 7}",5,84433.0,2025-04-04 00:59:06.139814
+30,Siddharth Naidu,"{'machine_learning': 8, 'javascript': 5}",4,63923.0,2025-04-04 00:59:06.139814
+31,Varun Menon,"{'data_analysis': 7, 'python': 7}",8,73348.0,2025-04-04 00:59:06.139814
+32,Shankar Rao,"{'java': 10, 'cloud_computing': 5}",7,74429.0,2025-04-04 00:59:06.139814
+33,Nitin Shetty,"{'data_analysis': 9, 'css': 5}",4,75255.0,2025-04-04 00:59:06.139814
+34,Bharat Kulkarni,"{'machine_learning': 7, 'css': 7, 'python': 7, 'sql': 7}",2,93166.0,2025-04-04 00:59:06.139814
+35,Vishal Krishnan,{'machine_learning': 10},6,67502.0,2025-04-04 00:59:06.139814
+36,Devendra Iyer,"{'python': 7, 'cloud_computing': 9}",9,66449.0,2025-04-04 00:59:06.139814
+37,Lokesh Banerjee,"{'ui_design': 8, 'sql': 6, 'data_analysis': 6}",8,78146.0,2025-04-04 00:59:06.139814
+38,Jayesh Pandey,"{'data_analysis': 7, 'python': 7, 'cloud_computing': 10, 'c++': 8, 'machine_learning': 7}",10,96708.0,2025-04-04 00:59:06.139814
+39,Mahesh Joshi,"{'c++': 8, 'sql': 5, 'cloud_computing': 9}",10,114034.0,2025-04-04 00:59:06.139814
+40,Ramesh Chatterjee,"{'python': 8, 'machine_learning': 5, 'data_analysis': 5, 'ui_design': 7, 'java': 9}",9,94826.0,2025-04-04 00:59:06.139814
+41,Sachin Mishra,"{'sql': 10, 'cloud_computing': 10, 'css': 5}",6,89670.0,2025-04-04 00:59:06.139814
+42,Umesh Rao,"{'c++': 6, 'css': 8}",3,115765.0,2025-04-04 00:59:06.139814
+43,Rajat Malhotra,"{'ui_design': 5, 'machine_learning': 6}",4,118402.0,2025-04-04 00:59:06.139814
+44,Keshav Srinivasan,"{'css': 6, 'ui_design': 7}",9,118128.0,2025-04-04 00:59:06.139814
+45,Aditya Deshmukh,"{'javascript': 8, 'cloud_computing': 5, 'python': 10}",5,105524.0,2025-04-04 00:59:06.139814
+46,Nikhil Bhat,"{'java': 5, 'ui_design': 7, 'machine_learning': 10}",4,112089.0,2025-04-04 00:59:06.139814
+47,Ashok Shinde,"{'sql': 8, 'c++': 6, 'css': 6, 'cloud_computing': 6}",2,65658.0,2025-04-04 00:59:06.139814
+48,Vinay Trivedi,"{'javascript': 9, 'c++': 5, 'data_analysis': 9}",7,52843.0,2025-04-04 00:59:06.139814
+49,Arvind Tiwari,"{'css': 6, 'ui_design': 10}",1,87288.0,2025-04-04 00:59:06.139814
+50,Mohan Agarwal,"{'python': 9, 'c++': 7, 'data_analysis': 5, 'sql': 7}",10,107302.0,2025-04-04 00:59:06.139814

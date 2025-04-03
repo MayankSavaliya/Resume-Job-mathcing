@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h2 class="mb-0"><i class="bi bi-clipboard-check"></i> Job-Candidate Matching</h2>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('matching') }}" method="post" class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label for="threshold" class="form-label">Minimum Score Threshold</label>
+                        <input type="number" class="form-control" id="threshold" name="threshold" min="0" max="100" step="1" value="{{ threshold|default(5) }}">
+                        <div class="form-text">Matches below this threshold will not be considered. All scores are capped at 100.</div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary">Run Matching</button>
+                    </div>
+                </form>
+                
+                {% if not matches %}
+                    <div class="alert alert-info">
+                        {% if not matching_system.candidates or not matching_system.jobs %}
+                            You need to add at least one candidate and one job before you can perform matching.
+                        {% else %}
+                            No suitable matches found with the current threshold. Try lowering the threshold.
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if matches %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0"><i class="bi bi-bar-chart"></i> Suitability Matrix</h3>
+                <div class="btn-group" role="group">
+                    <button class="btn btn-outline-primary btn-sm" id="show-heatmap">Heatmap View</button>
+                    <button class="btn btn-outline-primary btn-sm" id="show-table">Table View</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> Scores are calculated based on skill matches, related skills, experience bonus, and salary expectations. 
+                    All scores are capped at 100 for better readability.
+                </div>
+                
+                {% if is_large_matrix %}
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle"></i> The matrix is large, so annotations are hidden for clarity. Use the Table View for detailed scores.
+                </div>
+                {% endif %}
+                
+                <div id="heatmap-view" class="text-center">
+                    {% if suitability_img %}
+                        <img src="data:image/png;base64,{{ suitability_img }}" class="img-fluid" alt="Suitability Matrix">
+                    {% endif %}
+                </div>
+                
+                <div id="table-view" style="display:none; overflow-x: auto;" class="mt-3">
+                    {{ suitability_table_html|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h3 class="mb-0"><i class="bi bi-table"></i> Matching Results</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-success">
+                    <i class="bi bi-check-circle"></i> Found {{ matches|length }} optimal matches above the threshold.
+                </div>
+                
+                <div class="mb-3">
+                    <h5>Salary Status Legend:</h5>
+                    <div class="d-flex gap-3">
+                        <span class="badge bg-success">Within: Salary expectation is within job range</span>
+                        <span class="badge bg-warning text-dark">Below: Salary expectation is below job range</span>
+                        <span class="badge bg-danger">Above: Salary expectation is above job range</span>
+                    </div>
+                </div>
+                
+                {{ report_html|safe }}
+                
+                <div class="mt-3">
+                    <button class="btn btn-success" onclick="window.print()">
+                        <i class="bi bi-printer"></i> Print Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // View toggle buttons
+    const heatmapBtn = document.getElementById('show-heatmap');
+    const tableBtn = document.getElementById('show-table');
+    
+    if (heatmapBtn && tableBtn) {
+        const heatmapView = document.getElementById('heatmap-view');
+        const tableView = document.getElementById('table-view');
+        
+        heatmapBtn.addEventListener('click', function() {
+            heatmapView.style.display = 'block';
+            tableView.style.display = 'none';
+            heatmapBtn.classList.add('active');
+            tableBtn.classList.remove('active');
+        });
+        
+        tableBtn.addEventListener('click', function() {
+            heatmapView.style.display = 'none';
+            tableView.style.display = 'block';
+            tableBtn.classList.add('active');
+            heatmapBtn.classList.remove('active');
+        });
+        
+        // Set default view
+        heatmapBtn.classList.add('active');
+    }
+});
+</script>
+{% endblock %}

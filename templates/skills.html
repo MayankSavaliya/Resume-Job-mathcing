@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h2 class="mb-0"><i class="bi bi-diagram-3"></i> Manage Skill Relationships</h2>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Define relationships between skills to improve matching. When a candidate has a related skill to a job requirement, they'll receive partial credit.</p>
+                
+                <form action="{{ url_for('skills') }}" method="post" class="mb-4">
+                    <div class="mb-3">
+                        <label for="skill1" class="form-label">From Skill</label>
+                        <input type="text" class="form-control" id="skill1" name="skill1" required
+                            list="skills-list" placeholder="Type or select a skill">
+                    </div>
+                    <div class="mb-3">
+                        <label for="skill2" class="form-label">To Skill</label>
+                        <input type="text" class="form-control" id="skill2" name="skill2" required
+                            list="skills-list" placeholder="Type or select a skill">
+                    </div>
+                    <div class="mb-3">
+                        <label for="weight" class="form-label">Relationship Strength (0.1-5.0)</label>
+                        <input type="number" class="form-control" id="weight" name="weight" min="0.1" max="5.0" step="0.1" value="1.0">
+                        <div class="form-text">Lower values indicate stronger relationships.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Relationship</button>
+                </form>
+                
+                <!-- Datalist for skill autocomplete -->
+                <datalist id="skills-list">
+                    {% for skill in skills %}
+                        <option value="{{ skill }}">
+                    {% endfor %}
+                </datalist>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h2 class="mb-0"><i class="bi bi-graph-up"></i> Skill Graph</h2>
+            </div>
+            <div class="card-body">
+                {% if skill_graph_img %}
+                    <img src="data:image/png;base64,{{ skill_graph_img }}" class="img-fluid" alt="Skill Graph">
+                {% else %}
+                    <div class="alert alert-info">
+                        No skill relationships defined yet. Add relationships to see the graph.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h2 class="mb-0"><i class="bi bi-list-check"></i> Existing Relationships</h2>
+            </div>
+            <div class="card-body">
+                {% if edges %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>From Skill</th>
+                                    <th>To Skill</th>
+                                    <th>Relationship Strength</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for edge in edges %}
+                                <tr>
+                                    <td>{{ edge.source }}</td>
+                                    <td>{{ edge.target }}</td>
+                                    <td>{{ edge.weight }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        No skill relationships have been defined yet.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
