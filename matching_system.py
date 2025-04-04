@@ -131,16 +131,28 @@ class ResumeMatchingSystem:
         self.min_score_threshold = threshold
 
     def find_optimal_matches(self):
+        """Find optimal matches between candidates and jobs."""
         if self.suitability_matrix is None:
             self.calculate_suitability_scores()
 
+        # Create a working copy of the suitability matrix
         cost_matrix = -self.suitability_matrix.copy()
-        filtered_cost_matrix = cost_matrix.copy()
-        filtered_cost_matrix[self.suitability_matrix < self.min_score_threshold] = np.inf
-
+        
+        # Create a mask for scores below threshold
+        below_threshold = self.suitability_matrix < self.min_score_threshold
+        
+        # For the Hungarian algorithm, set below-threshold values to infinity
+        cost_matrix_filtered = cost_matrix.copy()
+        cost_matrix_filtered[below_threshold] = np.inf
+        
+        # Store the original shape for reference
+        n_candidates, n_jobs = cost_matrix.shape
+        
+        # Attempt to find optimal assignments considering the threshold
         try:
-            candidate_indices, job_indices = linear_sum_assignment(filtered_cost_matrix)
+            candidate_indices, job_indices = linear_sum_assignment(cost_matrix_filtered)
             
+            # Filter out assignments that were forced but are actually below threshold
             matches = []
             for cand_idx, job_idx in zip(candidate_indices, job_indices):
                 score = self.suitability_matrix[cand_idx, job_idx]
@@ -150,12 +162,44 @@ class ResumeMatchingSystem:
                         'job': self.jobs[job_idx],
                         'score': score
                     })
-                    
-            return matches
             
+            return matches
+        
         except ValueError:
-            # If no feasible assignment exists (all scores below threshold)
-            return []
+            # If the filtered matrix has all-infinite rows or columns, 
+            # we need to find partial matches
+            
+            # Find rows (candidates) and columns (jobs) that have at least one value above threshold
+            valid_candidates = ~np.all(below_threshold, axis=1)
+            valid_jobs = ~np.all(below_threshold, axis=0)
+            
+            # If we have any valid candidates and jobs, find matches among them
+            if np.any(valid_candidates) and np.any(valid_jobs):
+                # Extract the submatrix of valid candidates and jobs
+                sub_matrix = cost_matrix[np.ix_(valid_candidates, valid_jobs)]
+                
+                # Run the algorithm on the submatrix
+                sub_cand_indices, sub_job_indices = linear_sum_assignment(sub_matrix)
+                
+                # Map back to original indices
+                orig_cand_indices = np.where(valid_candidates)[0][sub_cand_indices]
+                orig_job_indices = np.where(valid_jobs)[0][sub_job_indices]
+                
+                # Create matches for assignments above threshold
+                matches = []
+                for cand_idx, job_idx in zip(orig_cand_indices, orig_job_indices):
+                    score = self.suitability_matrix[cand_idx, job_idx]
+                    if score >= self.min_score_threshold:
+                        matches.append({
+                            'candidate': self.candidates[cand_idx],
+                            'job': self.jobs[job_idx],
+                            'score': score
+                        })
+                
+                return matches
+            else:
+                # No valid matches possible
+                return []
 
     def generate_report(self, matches=None):
         """Generate a detailed report of the matches."""
