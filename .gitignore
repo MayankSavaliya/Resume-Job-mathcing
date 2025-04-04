@@ -1,1 +1,43 @@
+# Python bytecode / cache files
 __pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+.env/
+.venv/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Generated files
+*.log
+*.csv
+*.png
+!data/*.csv  # Keep data CSV files
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Project specific
+instance/
+.coverage
+htmlcov/
+
+
+
