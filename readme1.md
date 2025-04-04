@@ -88,7 +88,7 @@ graph TD
     D -- No --> G
     D -- Yes --> E{Candidate salary > Job max?}
     E -- No --> G
-    E -- Yes --> F[salary_penalty = min(5, (candidate_salary - job_max_salary) // 10000)]
+    E -- Yes --> F["salary_penalty = min(5, integer_divide(candidate_salary - job_max_salary, 10000))"]
     F --> G
 ```
 

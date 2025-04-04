@@ -135,21 +135,27 @@ class ResumeMatchingSystem:
             self.calculate_suitability_scores()
 
         cost_matrix = -self.suitability_matrix.copy()
-        cost_matrix[self.suitability_matrix < self.min_score_threshold] = np.inf
+        filtered_cost_matrix = cost_matrix.copy()
+        filtered_cost_matrix[self.suitability_matrix < self.min_score_threshold] = np.inf
 
-        candidate_indices, job_indices = linear_sum_assignment(cost_matrix)
-
-        matches = []
-        for cand_idx, job_idx in zip(candidate_indices, job_indices):
-            score = self.suitability_matrix[cand_idx, job_idx]
-            if score >= self.min_score_threshold:
-                matches.append({
-                    'candidate': self.candidates[cand_idx],
-                    'job': self.jobs[job_idx],
-                    'score': score
-                })
-
-        return matches
+        try:
+            candidate_indices, job_indices = linear_sum_assignment(filtered_cost_matrix)
+            
+            matches = []
+            for cand_idx, job_idx in zip(candidate_indices, job_indices):
+                score = self.suitability_matrix[cand_idx, job_idx]
+                if score >= self.min_score_threshold:
+                    matches.append({
+                        'candidate': self.candidates[cand_idx],
+                        'job': self.jobs[job_idx],
+                        'score': score
+                    })
+                    
+            return matches
+            
+        except ValueError:
+            # If no feasible assignment exists (all scores below threshold)
+            return []
 
     def generate_report(self, matches=None):
         """Generate a detailed report of the matches."""

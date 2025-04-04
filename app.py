@@ -155,7 +155,7 @@ def matching():
     # Check if we have data to perform matching
     if not matching_system.candidates or not matching_system.jobs:
         flash('You need at least one candidate and one job to perform matching!', 'warning')
-        return render_template('matching.html')
+        return render_template('matching.html', matching_system=matching_system)
     
     # Calculate suitability scores
     matching_system.calculate_suitability_scores()
@@ -185,7 +185,8 @@ def matching():
         suitability_img=suitability_img,
         suitability_table_html=suitability_table_html,
         threshold=matching_system.min_score_threshold,
-        is_large_matrix=is_large_matrix
+        is_large_matrix=is_large_matrix,
+        matching_system=matching_system  # Add this line to pass the matching_system to the template
     )
 
 @app.route('/save_data', methods=['POST'])
